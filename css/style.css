@@ -10,6 +10,7 @@
 .container{
     width: 70%;
     margin: auto;
+    position: relative;
 }
 
 .slider{
@@ -86,4 +87,24 @@
 
 #next{
     bottom: 10px;
+}
+
+#the2Button{
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+button{
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 3px solid;
+    background-color: white;
+    transition: all 1s;
+}
+
+button:hover{
+    background-color: black;
+    color: white;
 }

@@ -122,18 +122,72 @@ for(let i=0;i<gameArray.length ; i++){
 
 }
 
-setInterval(function(){
+cicleInvers = setInterval(cicleInfiniteInverse,1000);
+clearInterval(cicleInvers);
+
+let cicle = setInterval(cicleInfinite,1000);
+let clockwise = true;
+
+function cicleInfinite(){
     
     imageWrapDom[currentImage].classList.remove('block');
-        imageRightDom[currentImage].classList.remove('brightness-border');
+    imageRightDom[currentImage].classList.remove('brightness-border');
    
-        if(currentImage < imageWrapDom.length - 1 ){
+    if(currentImage < imageWrapDom.length - 1 ){
         currentImage++;
         
-        }else if(currentImage == imageWrapDom.length - 1 ){
-            currentImage = 0;
-        }
+    }else if(currentImage == imageWrapDom.length - 1 ){
+        currentImage = 0;
+    }
         
-        imageWrapDom[currentImage].classList.add('block');
-        imageRightDom[currentImage].classList.add('brightness-border');
-},3000)
+    imageWrapDom[currentImage].classList.add('block');
+    imageRightDom[currentImage].classList.add('brightness-border');
+
+}
+
+function cicleInfiniteInverse(){
+    
+    imageWrapDom[currentImage].classList.remove('block');
+    imageRightDom[currentImage].classList.remove('brightness-border');
+   
+    if(currentImage > 0 ){
+        currentImage--;
+
+    }else if(currentImage == 0){
+        currentImage = imageWrapDom.length - 1 ;
+    }
+        
+    imageWrapDom[currentImage].classList.add('block');
+    imageRightDom[currentImage].classList.add('brightness-border');
+
+}
+
+const playStop = document.getElementById('play-stop');
+let isRunning = true;
+
+const reverse = document.getElementById('reverse');
+
+playStop.addEventListener('click',function(){
+    if(isRunning==true){
+        clearInterval(cicle);
+        clearInterval(cicleInvers);
+        isRunning=false;
+    }else{
+        cicle= setInterval(cicleInfinite,1000);
+        isRunning=true;
+    }
+});
+
+reverse.addEventListener('click',function(){
+    
+
+    if(clockwise==true){
+        clearInterval(cicle);
+        cicleInvers = setInterval(cicleInfiniteInverse,1000);
+        clockwise=false;
+    }else{
+        clearInterval(cicleInvers);
+        cicle= setInterval(cicleInfinite,1000);
+        clockwise=true;
+    }
+});
