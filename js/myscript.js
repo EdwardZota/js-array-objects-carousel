@@ -121,3 +121,19 @@ for(let i=0;i<gameArray.length ; i++){
     })
 
 }
+
+setInterval(function(){
+    
+    imageWrapDom[currentImage].classList.remove('block');
+        imageRightDom[currentImage].classList.remove('brightness-border');
+   
+        if(currentImage < imageWrapDom.length - 1 ){
+        currentImage++;
+        
+        }else if(currentImage == imageWrapDom.length - 1 ){
+            currentImage = 0;
+        }
+        
+        imageWrapDom[currentImage].classList.add('block');
+        imageRightDom[currentImage].classList.add('brightness-border');
+},3000)
