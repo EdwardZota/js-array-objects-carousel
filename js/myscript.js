@@ -87,9 +87,13 @@ prevDom.addEventListener('click',cicleInfiniteInverse);
 
 for(let i=0;i<gameArray.length ; i++){
     imageRightDom[i].addEventListener('click',function(){
+
         removeImage();
-        addImage();
+           
+        imageWrapDom[i].classList.add('block');
+        imageRightDom[i].classList.add('brightness-border');
         currentImage = i;
+        
     })
 
 }
