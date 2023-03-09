@@ -1,10 +1,3 @@
-const game = [
-    'img/01.webp',
-    'img/02.webp',
-    'img/03.webp',
-    'img/04.webp',
-    'img/05.webp'
-];
 
 const gameArray = [
     {
@@ -39,7 +32,7 @@ let imageSlideContent = "";
 
 let imageSlideContentRight = "";
 
-let iamgeArray = gameArray.forEach(elemento =>{
+let imageArray = gameArray.forEach(elemento =>{
     
     const newImageWrap =`<div class="image-wrapper">
                             <img class="image" src="${elemento.image}">
@@ -113,4 +106,18 @@ prevDom.addEventListener('click',
         imageWrapDom[currentImage].classList.add('block');
         imageRightDom[currentImage].classList.add('brightness-border');
     }
-)
+);
+
+for(let i=0;i<gameArray.length ; i++){
+    imageRightDom[i].addEventListener('click',function(){
+
+        imageWrapDom[currentImage].classList.remove('block');
+        imageRightDom[currentImage].classList.remove('brightness-border');
+           
+        imageWrapDom[i].classList.add('block');
+        imageRightDom[i].classList.add('brightness-border');
+        currentImage = i;
+        
+    })
+
+}
