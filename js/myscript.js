@@ -66,106 +66,91 @@ imageWrapDom[currentImage].classList.add('block');
 
 imageRightDom[currentImage].classList.add('brightness-border')
 
-
-
 const nextDom = document.querySelector('#next');
 const prevDom = document.querySelector('#prev');
 
-nextDom.addEventListener('click',
-    function(){ 
-        
-        imageWrapDom[currentImage].classList.remove('block');
-        imageRightDom[currentImage].classList.remove('brightness-border');
-   
-        if(currentImage < imageWrapDom.length - 1 ){
-        currentImage++;
-        
-        }else if(currentImage == imageWrapDom.length - 1 ){
-            currentImage = 0;
-        }
-        
-        imageWrapDom[currentImage].classList.add('block');
-        imageRightDom[currentImage].classList.add('brightness-border');
-    }
-)
+cicleInvers = setInterval(cicleInfiniteInverse,3000);
+clearInterval(cicleInvers);
 
-prevDom.addEventListener('click',
-    function(){
+let cicle = setInterval(cicleInfinite,3000);
+let clockwise = true;
 
-        imageWrapDom[currentImage].classList.remove('block');
-        imageRightDom[currentImage].classList.remove('brightness-border');
+const playStop = document.getElementById('play-stop');
+let isRunning = true;
+
+const reverse = document.getElementById('reverse');
 
 
-        if(currentImage > 0 ){
-            currentImage--;
+nextDom.addEventListener('click',cicleInfinite);
 
-        }else if(currentImage == 0){
-            currentImage = imageWrapDom.length - 1 ;
-        }
-
-        imageWrapDom[currentImage].classList.add('block');
-        imageRightDom[currentImage].classList.add('brightness-border');
-    }
-);
+prevDom.addEventListener('click',cicleInfiniteInverse);
 
 for(let i=0;i<gameArray.length ; i++){
     imageRightDom[i].addEventListener('click',function(){
-
-        imageWrapDom[currentImage].classList.remove('block');
-        imageRightDom[currentImage].classList.remove('brightness-border');
-           
-        imageWrapDom[i].classList.add('block');
-        imageRightDom[i].classList.add('brightness-border');
+        removeImage();
+        addImage();
         currentImage = i;
-        
     })
 
 }
+/******************************
+ * sezione cicli 
+********************************/
 
-cicleInvers = setInterval(cicleInfiniteInverse,1000);
-clearInterval(cicleInvers);
-
-let cicle = setInterval(cicleInfinite,1000);
-let clockwise = true;
 
 function cicleInfinite(){
     
-    imageWrapDom[currentImage].classList.remove('block');
-    imageRightDom[currentImage].classList.remove('brightness-border');
-   
+    removeImage();
+    ifElseTopBotton();
+    addImage();
+
+}
+
+function cicleInfiniteInverse(){
+    
+    removeImage();
+    ifElseBottonTop();
+    addImage();
+
+}
+
+/********************************************
+ * funzione di if e else su current image
+*********************************************/
+function ifElseTopBotton(){
     if(currentImage < imageWrapDom.length - 1 ){
         currentImage++;
         
     }else if(currentImage == imageWrapDom.length - 1 ){
         currentImage = 0;
     }
-        
-    imageWrapDom[currentImage].classList.add('block');
-    imageRightDom[currentImage].classList.add('brightness-border');
-
 }
 
-function cicleInfiniteInverse(){
-    
-    imageWrapDom[currentImage].classList.remove('block');
-    imageRightDom[currentImage].classList.remove('brightness-border');
-   
+function ifElseBottonTop(){
     if(currentImage > 0 ){
         currentImage--;
 
     }else if(currentImage == 0){
         currentImage = imageWrapDom.length - 1 ;
     }
-        
+}
+/******************************
+ * funzione aggiungi e rimuovi
+********************************/
+
+function addImage(){
     imageWrapDom[currentImage].classList.add('block');
     imageRightDom[currentImage].classList.add('brightness-border');
-
 }
 
-const playStop = document.getElementById('play-stop');
-let isRunning = true;
+function removeImage(){
+    imageWrapDom[currentImage].classList.remove('block');
+    imageRightDom[currentImage].classList.remove('brightness-border');
+}
 
-const reverse = document.getElementById('reverse');
+/******************************
+sezione pulsanti
+********************************/
 
 playStop.addEventListener('click',function(){
     if(isRunning==true){
@@ -173,21 +158,20 @@ playStop.addEventListener('click',function(){
         clearInterval(cicleInvers);
         isRunning=false;
     }else{
-        cicle= setInterval(cicleInfinite,1000);
+        cicle= setInterval(cicleInfinite,3000);
         isRunning=true;
     }
 });
 
 reverse.addEventListener('click',function(){
     
-
     if(clockwise==true){
         clearInterval(cicle);
-        cicleInvers = setInterval(cicleInfiniteInverse,1000);
+        cicleInvers = setInterval(cicleInfiniteInverse,3000);
         clockwise=false;
     }else{
         clearInterval(cicleInvers);
-        cicle= setInterval(cicleInfinite,1000);
+        cicle= setInterval(cicleInfinite,3000);
         clockwise=true;
     }
 });
